@@ -1,0 +1,41 @@
+-- Simple query --
+
+1. 
+SELECT Nama_Pembeli as 'Nama Pembeli', Jumlah_Pembelian as 'Jumlah Pembeli'
+FROM Pembelian
+GROUP BY Nama_Pembeli
+HAVING AVG(Jumlah_Pembelian) > 5;
+
+2.
+SELECT ID_Barang as 'ID Barang', Nama_Barang as 'Nama Barang', MIN(Stok_Barang) as 'Stok Barang Terendah'
+FROM Barang;
+
+3.
+SELECT br.ID_Barang as 'ID Barang', Nama_Barang as 'Nama Barang', Jumlah_Pembelian as 'Jumlah Pembelian'
+FROM Pembelian as pb
+JOIN Barang as br on br.ID_Barang = pb.ID_Barang
+ORDER BY Tanggal_Beli;
+
+4.
+SELECT Nama_Barang as 'Nama Barang', Tanggal_Terima as 'Tanggal Terima', Stok_Barang as 'Stok Barang'
+FROM Barang as br
+JOIN Pembelian as pb on pb.ID_Barang = br.ID_Barang
+WHERE Jumlah_Pembelian > 3
+AND Tanggal_Beli BETWEEN '2022-06-01' AND '2022-12-30';
+
+5.
+SELECT Tanggal_Beli as 'Tanggal Beli', Nama_Pembeli as 'Nama Pembeli', Jumlah_Pembelian as 'Jumlah Pembelian'
+FROM Pembelian
+WHERE Jumlah_Pembelian = 2
+
+UNION ALL
+
+SELECT Tanggal_Beli as 'Tanggal Beli', Nama_Pembeli as 'Nama Pembeli', Jumlah_Pembelian as 'Jumlah Pembelian'
+FROM Pembelian
+WHERE Nama_Pembeli LIKE '%al%' or Nama_Pembeli LIKE 'al%' or Nama_Pembeli LIKE '%al';
+
+6. 
+SELECT br.ID_Barang as 'ID Barang', Nama_Barang as 'Nama Barang', Tanggal_Beli as 'Tanggal Beli', Nama_Pembeli as 'Nama Pembeli', MAX(Jumlah_Pembelian) as 'Jumlah Pembelian'
+FROM Barang as br
+JOIN Pembelian as pb on pb.ID_Barang = br.ID_Barang;
+
